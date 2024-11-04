@@ -88,7 +88,7 @@ const LearnerSubmissions = [
 
   //get the scores
   //if the unique id  == learners id ? print all scores pertaining to that id in all the object.
-  for(i=0; i<uniqueValues.length; i++){
+  for(i=0; i<uniqueValues.length; i++){//ID
     console.log('unique ids with score below');
     console.log(uniqueValues[i].learner_id);
 
@@ -96,16 +96,47 @@ const LearnerSubmissions = [
     console.log('learner score with respective ID')
     for (j = 0; j < LearnerSubmissions.length; j++){
   if(uniqueValues[i].learner_id == LearnerSubmissions[j].learner_id){
-   console.log(LearnerSubmissions[j].submission.score)
+   console.log("these are the scores to this unique IDs", LearnerSubmissions[j].submission.score)
   }else{
-    console.log('Empty!')
+   // console.log('Empty!')
   }
+
+//begin import loops
+
+for(k=0; k< AssignmentGroup.assignments.length; k++){
+    for (p=0; p< LearnerSubmissions.length; p++){
+if (AssignmentGroup.assignments[k].id == LearnerSubmissions[p].assignment_id){
+    //console.log("true")
+    if(AssignmentGroup.assignments[k].due_at< LearnerSubmissions[p].submission.submitted_at){
+        lessMark = ((LearnerSubmissions[p].submission.score / AssignmentGroup.assignments[k].points_possible)/100*10);
+        console.log("submitted late Actual score percentage", lessMark)
+        lessMarkFinal = lessMark * 9;
+        console.log("lost 10 percent due to late submission",lessMarkFinal)
+    }
+
+    if(AssignmentGroup.assignments[k].due_at >= LearnerSubmissions[p].submission.submitted_at){
+      
+       // console.log("should be marked and awarded mark")
+// iterate  assignment length in and iterate learners submission in
+//console.log("beginning of Assignment not yet due")
+    console.log(LearnerSubmissions[p].submission.score / AssignmentGroup.assignments[k].points_possible)
+   // console.log("end of first divided score")
+    }else {
+        console.log("End of Assignment is not yet due")
+    }//end inner if
+
+}// end outer if
+    }//end of inner for loop
+}//end for outter for loop
+
+//end import loops
     }//end of inner for loop
 console.log('break btw unique IDs')
 }// end of outer for loop
 
 
 console.log("*******scores division**********")
+/*
 for(k=0; k< AssignmentGroup.assignments.length; k++){
     for (p=0; p< LearnerSubmissions.length; p++){
 if (AssignmentGroup.assignments[k].id == LearnerSubmissions[p].assignment_id){
@@ -120,7 +151,7 @@ if (AssignmentGroup.assignments[k].id == LearnerSubmissions[p].assignment_id){
 }// end outer if
     }//end of inner for loop
 }//end of outter for loop
-
+*/
 
 
 //date collection for manipulation
