@@ -120,7 +120,7 @@ if (AssignmentGroup.assignments[k].id == LearnerSubmissions[p].assignment_id){
     console.log("score / points possible", LearnerSubmissions[p].submission.score / AssignmentGroup.assignments[k].points_possible)
 
         
-
+//Accounting for potential errors
     }else if(LearnerSubmissions[p].submission.score == 0 || ""){
         console.log("you cannot divide by Zero or a String")
     }//end inner if
@@ -290,11 +290,30 @@ if(yyyy <= y[r]){
 }else if(dd < y[r]){
    // console.log("date is also greater")
 } else{
-    console.log('assignment not yet due')//end if
+   // console.log('assignment not yet due')//end if
 
 }
 //end for
 }
 
+function getLearnerData(CourseInfo, AssignmentGroup, [learnerSubmission]){
+    const result = [
+        {
+            id: 125,
+            avg: 0.985, // (47 + 150) / (50 + 150)
+            1: 0.94, // 47 / 50
+            2: 1.0, // 150 / 150
+        },
+        {
+            id: 132,
+            avg: 0.82, // (39 + 125) / (50 + 150)
+            1: 0.78, // 39 / 50
+            2: 0.833, // late: (140 - 15) / 150
+        },
+    ];
+
+} return getLearnerData
+
+getLearnerData()
 
 
