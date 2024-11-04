@@ -84,78 +84,82 @@ const LearnerSubmissions = [
   ].map((id) => LearnerSubmissions.find((item) => item.learner_id === id));
   
  //console.log('unique ids')
-  console.log(uniqueValues.length)
+  console.log(uniqueValues.length, "Unique IDs")
 
   //get the scores
   //if the unique id  == learners id ? print all scores pertaining to that id in all the object.
   for(i=0; i<uniqueValues.length; i++){//ID
-    console.log('unique ids with score below');
-    console.log(uniqueValues[i].learner_id);
+    //console.log('unique ids with score below');
+    console.log("ID = ", uniqueValues[i].learner_id);
 
     //getting the score data
     console.log('learner score with respective ID')
     for (j = 0; j < LearnerSubmissions.length; j++){
   if(uniqueValues[i].learner_id == LearnerSubmissions[j].learner_id){
    console.log("these are the scores to this unique IDs", LearnerSubmissions[j].submission.score)
-  }else{
-   // console.log('Empty!')
-  }
+  
 
 //begin import loops
 
 for(k=0; k< AssignmentGroup.assignments.length; k++){
     for (p=0; p< LearnerSubmissions.length; p++){
 if (AssignmentGroup.assignments[k].id == LearnerSubmissions[p].assignment_id){
-    //console.log("true")
+//from here
     if(AssignmentGroup.assignments[k].due_at< LearnerSubmissions[p].submission.submitted_at){
         lessMark = ((LearnerSubmissions[p].submission.score / AssignmentGroup.assignments[k].points_possible)/100*10);
         console.log("submitted late Actual score percentage", lessMark)
         lessMarkFinal = lessMark * 9;
         console.log("lost 10 percent due to late submission",lessMarkFinal)
+    
     }
-
     if(AssignmentGroup.assignments[k].due_at >= LearnerSubmissions[p].submission.submitted_at){
       
        // console.log("should be marked and awarded mark")
 // iterate  assignment length in and iterate learners submission in
 //console.log("beginning of Assignment not yet due")
-    console.log(LearnerSubmissions[p].submission.score / AssignmentGroup.assignments[k].points_possible)
-   // console.log("end of first divided score")
-    }else {
-        console.log("End of Assignment is not yet due")
+    console.log("score / points possible", LearnerSubmissions[p].submission.score / AssignmentGroup.assignments[k].points_possible)
+
+        
+
+    }else if(LearnerSubmissions[p].submission.score == 0 || ""){
+        console.log("you cannot divide by Zero or a String")
     }//end inner if
+
+
+
+
+
+
+//average
+// for (u=0; u<LearnerSubmissions.length;u++){
+//     average = LearnerSubmissions[u].submission.score
+//    }
+   
+  // for (let i = 0; i < arr. length; i++) { sum += arr[i]; }
 
 }// end outer if
     }//end of inner for loop
+    //console.log('break btw unique IDs')
+
 }//end for outter for loop
+  }
+}
+    console.log('break btw unique IDs')
 
-//end import loops
-    }//end of inner for loop
-console.log('break btw unique IDs')
-}// end of outer for loop
+}
+  
 
 
-console.log("*******scores division**********")
-/*
-for(k=0; k< AssignmentGroup.assignments.length; k++){
-    for (p=0; p< LearnerSubmissions.length; p++){
-if (AssignmentGroup.assignments[k].id == LearnerSubmissions[p].assignment_id){
-    //console.log("true")
-    if(AssignmentGroup.assignments[k].due_at >= LearnerSubmissions[p].submission.submitted_at){
-        console.log("should be marked and awarded mark")
-// iterate  assignment length in and iterate learners submission in
-    console.log(LearnerSubmissions[p].submission.score / AssignmentGroup.assignments[k].points_possible)
-    }else {
-        console.log("this Assignment is not yet due")
-    }//end inner if
-}// end outer if
-    }//end of inner for loop
-}//end of outter for loop
-*/
 
+
+
+
+
+
+//console.log("*******scores division**********")
 
 //date collection for manipulation
-console.log('date data')
+//console.log('date data')
 const today = new Date();
 const yyyy = today.getFullYear();
 let mm = today.getMonth() + 1; // Months start at 0!
@@ -166,36 +170,24 @@ if (mm < 10) mm = '0' + mm;
 
 const formattedToday = yyyy + '-' + mm + '-' + dd;
 
-console.log(formattedToday)
+//console.log(formattedToday)
 
 //breaking down the date to be able to compare it properly
+//assignment not yet due from here
 let y = LearnerSubmissions[0].submission.submitted_at.split("-");
-for (r = 0; r < LearnerSubmissions.length; r++){
-console.log(y[0])
-if(yyyy <= y[r]){
-    console.log("years is more than the due year")
 
-   
-}else if(mm < y[r]){
-    console.log("month is greater")
-
-}else if(dd < y[r]){
-    console.log("date is also greater")
-} else{
-    console.log('assignment not yet due')//end if
-
-}
-//end for
-}
 // end of date comparison test
 
 
-
 //if an assignment group does not belong to its course 
+try{
 if(AssignmentGroup.course_id !== CourseInfo.id){
-    console.log("no such number")
+    console.log("invalid number")
 }
-//getting assignment due date and points_possible
+} catch(error) {
+    // Code to handle the error
+    console.error("An error occurred:", error); 
+  }//getting assignment due date and points_possible
 
 //due dates
 console.log("**********due dates************")
@@ -211,22 +203,6 @@ for (t = 0; t < AssignmentGroup.assignments.length; t++){
  for (y = 0; y < AssignmentGroup.assignments.length; y++){
     console.log(AssignmentGroup.assignments[y].points_possible)
 }
-//submission date validation
-console.log("submission date validation")
-//if ()
-
-//console.log(AssignmentGroup.assignments[0].due_at)
-//Assignment_length = AssignmentGroup.assignments.length;
-//console.log(Assignment_length)
-
-
-
-   //console.log(AssignmentGroup.course_id)
-   //console.log(AssignmentGroup.assignments)
-
-
-
-
 
 
   //let a = LearnerSubmissions.length;
@@ -259,8 +235,15 @@ LearnerSubmissions.forEach(person => console.log(person.assignment_id));
 
 */
 
-//learnersID()
+//learner
+//average = LearnerSubmissions[0].submission
 
+// function getLearnerData(course, ag, submissions){
+//     co
+//    console.log(JSON.stringify(result.map(a => a.name)))
+
+// }return result
+// getLearnerData()
 /*
 function getLearnerData(course, ag, submissions) {
     // here, we would process this data to achieve the desired result.
@@ -287,3 +270,31 @@ const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
 
 console.log(result);
  */
+
+for (u=0; u<LearnerSubmissions.length;u++){
+    score_awarded = LearnerSubmissions[u].submission.score       
+    console.log("score awarded for each submission " , score_awarded)
+}
+
+console.log("assignment not yet due")
+
+for (r = 0; r < LearnerSubmissions.length; r++){
+//console.log(y[0])
+if(yyyy <= y[r]){
+   // console.log("years is more than the due year")
+
+   
+}else if(mm < y[r]){
+    //console.log("month is greater")
+
+}else if(dd < y[r]){
+   // console.log("date is also greater")
+} else{
+    console.log('assignment not yet due')//end if
+
+}
+//end for
+}
+
+
+
